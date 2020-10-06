@@ -18,9 +18,6 @@
 #Variables
 \*------------------------------------*/
 
-
-
-
 :root {
   /* colors */
   --global-color-alpha-light: #4f95ff;
@@ -69,21 +66,6 @@
   --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
 
 
-  --global-page-color: var(--color-neutral-xxxx-dark);
-  --global-page-backgroundColor: var(--color-neutral-xxxx-light);
-}
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-      --global-page-color: White;
-      --global-page-backgroundColor: var(--color-neutral-xxxx-dark);
-  }
-
-  html {
-    color: var(--global-page-color); 
-    background-color: var(--global-page-backgroundColor);
-  }
 }
 
 /*------------------------------------*\
@@ -106,6 +88,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 *,
 *:before,
@@ -681,11 +665,6 @@ input::placeholder {
       Do magic stuff here, for example:*/
 }
 
-.c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .c-option--hidden:focus + .c-custom-option .c-custom-option__fake-input {
   border-color: var(--global-color-alpha);
   box-shadow: var(--global-input-boxShadow);
@@ -713,6 +692,11 @@ input::placeholder {
   transform: scale(0);
   will-change: opacity, transform;
   transition: opacity 150ms ease-in, transform 150ms ease-in;
+}
+
+.c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .c-custom-option__fake-input {
@@ -753,6 +737,7 @@ input::placeholder {
 }
 
 .c-custom-toggle {
+  /*Zowel de knop als de tekst wordt geselecteerd*/
   --custom-option-borderColor: var(--global-input-borderColor);
   display: flex;
   align-items: center;
@@ -760,6 +745,7 @@ input::placeholder {
 }
 
 .c-custom-toggle__fake-input {
+  /*Aanmaak knop zelf (dus niet de tekst))*/
   display: block;
   width: 48px;
   height: 24px;
@@ -768,10 +754,12 @@ input::placeholder {
 
   border: 1px solid var(--global-input-borderColor);
   border-radius: 24px;
+  /*Transition om van checked weer naar normaal te gaan*/
   transition: all var(--global-transitionTiming-alpha);
 }
 
 .c-custom-toggle__fake-input::after {
+  /*Aanmaak bol van toggle*/
   content: '';
   display: block;
 
@@ -782,6 +770,7 @@ input::placeholder {
   background-color: white;
   box-shadow: inset;
 
+  /*Transition om van normaal naar checked te gaan*/
   transition: all var(--global-transitionTiming-alpha);
 }
 
@@ -831,21 +820,20 @@ input::placeholder {
 
 .c-custom-select__symbol {
   position: relative;
-  Z-index:2;
+  z-index: 2;
   pointer-events: none;
   margin-left: -36px;
 
   fill: black;
   width: 24px;
   height: 24px;
-
 }
 
-.c-custom-select__input{
-  position:relative;
+.c-custom-select__input {
+  position: relative;
   z-index: 1;
   display: block;
-  width:100%;
+  width: 100%;
 }
 
 /*
@@ -866,10 +854,9 @@ input::placeholder {
   padding-bottom: 0;
 }
 
-.c-custom-select__input{
+.c-custom-select__input {
   display: block;
-  width:100%;
-  
+  width: 100%;
 }
 
 /*
@@ -1214,7 +1201,88 @@ input::placeholder {
 #MEDIA
 \*------------------------------------*/
 
+@media (prefers-color-scheme: dark) {
+  :root{
+
+    --global-dark-page-card__body-color: var(--global-color-neutral-xxx-dark);
+    --global-dark-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+  
+    --global-dark-input-backgroundColor: var(--global-color-neutral-xxxx-dark);
+    --global-dark-input-labelColor: var(--global-color-neutral-x-light);
+    --global-dark-input-placeholder: var(--global-color-neutral-dark);
+    --global-dark-SvgColor: var(--global-color-neutral-x-dark);
+    --global-dark-text : white;
+
+  
+
+  }
+
+
+  html {
+    background-color: var(--global-dark-page-backgroundColor);
+    color: white;
+  }
+
+  .c-card__body {
+    background-color: var(--global-dark-page-card__body-color);
+  }
+
+
+  .c-card .c-card__footer {
+    background-color: var(--global-dark-page-card__body-color);
+    border-top: var(--global-borderWidth) solid
+      var(--global-dark-page-backgroundColor);
+  }
+
+  .c-logo__path--1 {
+    fill: var(--global-dark-text);
+  }
+  
+  .c-logo__path--2 {
+    fill: var(--global-dark-text);
+  }
+  
+  .c-logo__path--3 {
+    fill: var(--global-dark-text);
+  }
+
+  .c-input{
+    background-color: var(--global-dark-input-backgroundColor);
+    border: 1px solid var(--global-dark-input-backgroundColor);
+    color:var(--global-dark-text);
+  }
+
+  .c-input::placeholder{
+    color: var(--global-dark-input-placeholder)
+  }
+
+  .c-label{
+    color:var(--global-dark-input-labelColor);
+  }
+
+  .c-custom-option__fake-input {
+    border: 1px solid var(--global-dark-input-backgroundColor);
+    background-color: var(--global-dark-input-backgroundColor);
+
+  }
+
+  .c-custom-select__symbol{
+    height:20px;
+    width:20px;
+  }
+
+  .c-custom-select__symbol .c-icon-eye{
+    fill:var(--global-dark-SvgColor);
+  }
+
+  .c-input:hover {
+    border-color:var(--global-color-alpha-dark);
+  }
+}
+
+
 /*
+
     Media Queries
     ---
     EXAMPLE Media Queries for Responsive Design.
